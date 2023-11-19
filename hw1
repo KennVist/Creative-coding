@@ -1,0 +1,73 @@
+Circle[] cls;
+int num = 50;
+
+
+void initiate() {
+  cls = new Circle[num];
+for (int idx = 0; idx < cls.length; idx ++) {
+
+    float xx = width / 2;
+    float yy = height / 2;
+    float dd = 10*idx;
+    cls[idx] = new Circle(xx, yy, dd);
+  }
+}
+
+void setup() {
+  size(600, 600);
+  background(255);
+  initiate();
+}
+
+void draw() {
+  background(255);
+ 
+  for (int idx = 0; idx < cls.length; idx ++) {
+    cls[idx].move();
+    cls[idx].show();
+  }
+   println ("frameRate;"+frameRate);
+  saveFrame();
+}
+void keyPressed() {
+  if (key == 'r') {
+    initiate();
+  }
+
+}
+
+
+class Circle{
+
+  float cX, cY;
+  float speedX, speedY;
+  float dia;
+  float idx;
+
+
+  Circle(float x, float y, float d){
+    cX = x;
+    cY = y;
+    dia = d;
+    speedX = random(4);
+    speedY = random(4);
+  }
+ 
+  void show(){
+  fill(255,10);
+  noStroke();
+  rect(0,0,width,height);
+  
+    stroke(0,0,0);
+    strokeWeight(3);
+    noFill();
+    ellipse(cX, cY, dia + 10 * idx, dia + 10 * idx);
+    dia=dia+5;
+  }
+  
+  void move(){
+    cX += speedX;
+    cY += speedY;
+  }
+
+}
